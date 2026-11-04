@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Fondo sólido: el lanzador aplica su propia máscara de forma. -->
+    <path android:fillColor="#0E0E12" android:pathData="M0,0h108v108h-108z"/>
+    <!-- La S de la marca: dos arcos gruesos de puntas redondeadas, la misma figura
+         que el icono del televisor y que la marca dentro de la aplicación. -->
+    <path android:strokeColor="#E53D49" android:strokeWidth="16.2" android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:pathData="M74.52,36.72 A20.52,20.52 0 1 0 52.21,57.16"/>
+    <path android:strokeColor="#E53D49" android:strokeWidth="16.2" android:fillColor="#00000000"
+        android:strokeLineCap="round"
+        android:pathData="M55.79,50.84 A20.52,20.52 0 1 1 33.48,71.28"/>
+</vector>

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>SergioFlix</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- La S de la marca, trazada en SVG: la misma que el icono de la aplicación. -->
+<div id="brand" class="screen">
+  <svg class="brand-mark" width="112" height="112" viewBox="0 0 100 100">
+    <path d="M69,34 A19,19 0 1 0 48.34,52.93" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+    <path d="M51.66,47.07 A19,19 0 1 1 31,66" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+  </svg>
+  <div class="wordmark"><span class="light">SERGIO</span><span class="heavy">FLIX</span></div>
+  <div id="brand-spinner" class="spinner"></div>
+  <p id="brand-note">Conectando con tu videoteca…</p>
+  <div id="brand-back" class="brand-back focus" role="button" hidden>Volver</div>
+</div>
+
+<div id="pair" class="screen" hidden>
+  <svg class="brand-mark" width="72" height="72" viewBox="0 0 100 100">
+    <path d="M69,34 A19,19 0 1 0 48.34,52.93" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+    <path d="M51.66,47.07 A19,19 0 1 1 31,66" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+  </svg>
+  <div class="wordmark"><span class="light">SERGIO</span><span class="heavy">FLIX</span></div>
+  <h1>Conecta tu televisor</h1>
+  <p>En tu videoteca abre el panel y pulsa <b>Conectar televisor</b>.</p>
+  <p>Escribe aquí el código de ocho dígitos.</p>
+  <div id="digits" class="digits"></div>
+  <div id="pad" class="keypad"></div>
+  <p class="hint">Mueve con las flechas y pulsa OK. La tecla Volver borra el último número.</p>
+  <p id="pair-error" class="error"></p>
+</div>
+
+<div id="home" class="screen" hidden>
+  <div class="topbar pad">
+    <div id="brand-home" class="left" role="button" aria-label="Inicio">
+      <svg class="brand-mark" width="34" height="34" viewBox="0 0 100 100">
+        <path d="M69,34 A19,19 0 1 0 48.34,52.93" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+    <path d="M51.66,47.07 A19,19 0 1 1 31,66" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+      </svg>
+      <div class="wordmark"><span class="light">SERGIO</span><span class="heavy">FLIX</span></div>
+    </div>
+    <div id="nav" class="nav" role="navigation" aria-label="Secciones principales">
+      <div id="nav-search" class="nav-item" role="button">Buscar</div>
+      <div id="nav-series" class="nav-item" role="button">Series</div>
+      <div id="nav-movie" class="nav-item" role="button">Películas</div>
+      <div id="nav-list" class="nav-item" role="button">Mi lista</div>
+      <div id="nav-karaoke" class="nav-item nav-karaoke" role="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 14a4 4 0 0 0 4-4V5a4 4 0 1 0-8 0v5a4 4 0 0 0 4 4zm7-4h-2a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V20H8v2h8v-2h-3v-3.08A7 7 0 0 0 19 10z" fill="currentColor"/>
+        </svg><span>Karaoke</span>
+      </div>
+      <div id="nav-tv" class="nav-item" role="button">TV</div>
+      <div id="nav-exit" class="nav-item exit" role="button">Salir</div>
+    </div>
+    <span id="clock"></span>
+  </div>
+  <div id="hero">
+    <img id="hero-art" alt="">
+    <div id="hero-shade"></div>
+    <div id="hero-text">
+      <h1 id="hero-title"></h1>
+      <div id="hero-meta"></div>
+      <div id="hero-desc"></div>
+    </div>
+  </div>
+  <div id="rows-view"><div id="rows"></div></div>
+  <div id="search-panel" hidden>
+    <div class="search-head pad">
+      <h1>¿Qué quieres ver?</h1>
+      <div id="search-box" class="search-box">
+        <svg width="36" height="36" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10 3a7 7 0 1 0 4.9 12l5.1 5 1.4-1.4-5-5A7 7 0 0 0 10 3zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z" fill="#dedde2"/>
+        </svg>
+        <input id="search-input" type="search" maxlength="120" autocomplete="off"
+               placeholder="Película o serie" aria-label="Película o serie">
+        <button id="search-submit" class="search-submit" type="button">Buscar</button>
+      </div>
+      <p id="search-status" class="search-status" role="status" aria-live="polite">Escribe al menos dos letras. ↓ Seleccionar Buscar · OK Confirmar</p>
+    </div>
+    <div id="search-results-view" hidden>
+      <h2 id="search-results-title">Resultados</h2>
+      <div class="search-strip"><div id="search-results" class="strip-inner"></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="connection-lost" class="connection-lost" hidden>
+  <div class="connection-card">
+    <svg width="74" height="74" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm-1 5h2v7h-2zm0 9h2v2h-2z" fill="#e53d49"/>
+    </svg>
+    <h1>No encuentro el PC de la videoteca</h1>
+    <p>Comprueba que el PC esté encendido. Puedes reintentar sin reiniciar el televisor.</p>
+    <div id="connection-retry" class="connection-retry focus" role="button">Reintentar</div>
+  </div>
+</div>
+
+<!-- Reconexión en curso: lo dice sin apagar la imagen y sin secuestrar el mando.
+     Mientras la película siga corriendo, tapar la pantalla sería apagar lo único
+     que estaba funcionando. -->
+<div id="connection-mini" class="connection-mini" role="status" aria-live="polite" hidden>
+  <div class="spinner small"></div><span>Reconectando con el PC…</span>
+</div>
+
+<!-- Acceso lateral de respaldo: el botón de voz es reservado por algunos Tizen. -->
+<div id="gpt-launcher" class="gpt-launcher" role="button" aria-label="Asistente GPT" hidden>
+  <svg width="42" height="42" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 2l1.7 5.3L19 9l-5.3 1.7L12 16l-1.7-5.3L5 9l5.3-1.7L12 2zm6 12 .9 2.8L22 18l-3.1 1.2L18 22l-1-2.8L14 18l3-1.2L18 14z" fill="#fff"/>
+  </svg>
+  <span>GPT</span>
+</div>
+
+<div id="assistant-overlay" class="assistant-overlay" hidden>
+  <div class="assistant-modal">
+    <div class="assistant-heading">
+      <div class="assistant-mark" aria-hidden="true">
+        <svg width="58" height="58" viewBox="0 0 64 64" fill="none">
+          <path d="M16 17L45 13L49 43L22 50L16 17L49 43M16 17L32 31L22 50M45 13L32 31L49 43"
+                stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="16" cy="17" r="4" fill="currentColor"/><circle cx="45" cy="13" r="3" fill="currentColor"/>
+          <circle cx="32" cy="31" r="5" fill="currentColor"/><circle cx="49" cy="43" r="4" fill="currentColor"/>
+          <circle cx="22" cy="50" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <div><div class="assistant-eyebrow">SERGIOFLIX · BÚSQUEDA INTELIGENTE</div>
+        <h1>¿Qué quieres ver?</h1><p>Describe lo que te apetece. Descubre por qué encaja cada título.</p></div>
+    </div>
+    <div class="assistant-search">
+      <div id="assistant-box" class="assistant-box">
+        <!-- Mantener el límite de dictado alineado con AssistantRequest en la API. -->
+        <input id="assistant-input" type="search" maxlength="800" autocomplete="off"
+               placeholder="Ej: recomiéndame películas de Robert De Niro" aria-label="Consulta al asistente">
+      </div>
+      <div class="assistant-actions">
+        <div id="assistant-submit" class="assistant-submit" role="button">Buscar</div>
+      </div>
+    </div>
+    <p id="assistant-status" class="assistant-status" role="status" aria-live="polite">Pulsa el micrófono y dicta tu búsqueda.</p>
+    <p id="assistant-answer" class="assistant-answer" hidden></p>
+    <div id="assistant-results-view" class="assistant-results-view" hidden>
+      <div class="assistant-results-heading"><div>SELECCIÓN PARA TI</div><div id="assistant-position"></div></div>
+      <div class="assistant-strip"><div id="assistant-results" class="strip-inner"></div></div>
+    </div>
+    <p class="assistant-help">← → Explorar títulos &nbsp; · &nbsp; OK Abrir &nbsp; · &nbsp; ↑ Cambiar búsqueda &nbsp; · &nbsp; Volver Cerrar</p>
+  </div>
+</div>
+
+<!-- Ficha: la información abajo a la izquierda, como en cualquier servicio de streaming. -->
+<div id="detail" class="screen" hidden>
+  <img id="detail-art" alt="">
+  <div id="detail-shade"></div>
+  <div id="detail-body">
+    <h1 id="detail-name"></h1>
+    <div id="detail-meta"></div>
+    <p id="detail-desc"></p>
+    <div id="detail-actions" class="acciones"></div>
+  </div>
+  <div id="detail-strip" class="tira" hidden>
+    <div class="tira-heading">
+      <h2 id="detail-strip-title">Episodios</h2>
+      <div id="detail-seasons" class="season-tabs" aria-label="Temporadas"></div>
+    </div>
+    <div class="tira-view"><div id="detail-episodes" class="tira-inner"></div></div>
+  </div>
+</div>
+
+<!-- Elección explícita al abrir un capítulo con avance. Es común también cuando el
+     backend ya lo considera visto por estar en los créditos: la posición real se
+     conserva para que la persona decida. -->
+<div id="resume-prompt" class="choice-overlay" role="dialog" aria-modal="true" hidden>
+  <div class="choice-modal">
+    <p class="choice-kicker">EPISODIO INICIADO</p>
+    <h2 id="resume-title">¿Cómo quieres verlo?</h2>
+    <p id="resume-detail"></p>
+    <div class="choice-actions">
+      <div id="resume-continue" class="choice-button focus" role="button">Continuar viendo</div>
+      <div id="resume-restart" class="choice-button" role="button">Ver desde el inicio</div>
+    </div>
+    <small>Izquierda/Derecha elige · OK confirma · Volver cancela</small>
+  </div>
+</div>
+
+<div id="player" class="screen player" hidden>
+  <video id="video" preload="none"></video>
+  <div id="subtitle" class="subtitle"></div>
+  <div id="player-brand" class="overlay-brand">
+    <svg class="brand-mark" width="96" height="96" viewBox="0 0 100 100">
+      <path d="M69,34 A19,19 0 1 0 48.34,52.93" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+    <path d="M51.66,47.07 A19,19 0 1 1 31,66" fill="none" stroke="#e53d49" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <div class="wordmark"><span class="light">SERGIO</span><span class="heavy">FLIX</span></div>
+    <div id="player-spinner" class="spinner"></div>
+    <p id="player-note">Preparando…</p>
+    <div id="player-action" class="acciones" hidden></div>
+  </div>
+  <!-- La preparación muestra estado, sin porcentajes ni segundos simulados. -->
+  <div id="player-loading" class="loading-overlay" hidden>
+    <div id="player-loading-modal" class="loading-modal" role="status" aria-live="polite">
+      <div class="spinner loading-spinner" aria-hidden="true"></div>
+      <p id="player-loading-text">Buscando en la red…</p>
+    </div>
+  </div>
+  <!-- El logro no lleva caja: aparece un instante sobre la imagen antes del próximo hito. -->
+  <div id="player-success" class="loading-success" role="status" aria-live="polite" hidden>
+    <span class="success-mark">✓</span><span id="player-success-text">¡Listo!</span>
+  </div>
+  <!-- Aviso ligero: se pone encima de la imagen sin apagarla, para saltos y cargas. -->
+  <div id="trabajo" class="trabajo" hidden>
+    <div id="trabajo-rueda" class="spinner small"></div>
+    <span id="trabajo-texto"></span>
+  </div>
+  <div id="next" class="notice" hidden></div>
+  <div id="subs" class="menu" hidden></div>
+  <div id="player-strip" class="tira" hidden>
+    <div class="tira-heading">
+      <h2 id="player-strip-title">Episodios</h2>
+      <div id="player-seasons" class="season-tabs" aria-label="Temporadas"></div>
+    </div>
+    <div class="tira-view"><div id="player-episodes" class="tira-inner"></div></div>
+  </div>
+  <div id="controls" class="controls">
+    <div id="player-title" class="player-title"></div>
+    <div id="bar" class="bar">
+      <div id="bar-ready"></div>
+      <div id="bar-fill"></div>
+      <div id="bar-dot"></div>
+      <div id="scrub-time" class="scrub-time" hidden></div>
+    </div>
+    <div class="times"><span id="elapsed">0:00</span><span id="total">--:--</span></div>
+    <div id="acciones" class="acciones"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body></html>

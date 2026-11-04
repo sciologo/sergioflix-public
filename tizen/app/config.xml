@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Aplicación de televisor para Samsung (Tizen).
+
+  El contenido que se instala es solo el arranque: en cuanto encuentra la videoteca,
+  la aplicación se va a `http://<equipo>:8765/tv/`. Así el televisor siempre muestra
+  la última versión de la interfaz sin volver a empaquetar ni reinstalar nada, y todas
+  las peticiones salen del mismo origen que el servicio, sin permisos entre orígenes.
+
+  `required_version` 2.4 mantiene la compatibilidad del arranque con Tizen antiguo.
+  Cada usuario debe firmar el paquete para sus propios dispositivos.
+-->
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets"
+        id="http://sergioflix.casa/tv" version="1.0.3" viewmodes="maximized">
+  <tizen:application id="SergioFlx1.SergioFlix" package="SergioFlx1" required_version="2.4"/>
+  <tizen:profile name="tv"/>
+  <content src="index.html"/>
+  <icon src="icon.png"/>
+  <name>SergioFlix</name>
+  <description>Tu videoteca en el televisor.</description>
+  <author>SergioFlix</author>
+  <!-- `hwkey-event` es lo que hace que la tecla Volver del mando llegue como evento. -->
+  <tizen:setting screen-orientation="landscape" context-menu="disable" background-support="disable"
+                 encryption="disable" install-location="auto" hwkey-event="enable"/>
+  <tizen:privilege name="http://tizen.org/privilege/internet"/>
+  <tizen:privilege name="http://tizen.org/privilege/tv.inputdevice"/>
+  <!-- Sin esto la aplicación no puede salir a la dirección de la videoteca. -->
+  <access origin="*" subdomains="true"/>
+  <!-- Tizen aplica una política de contenido estricta si no se declara ninguna, y con
+       ella el arranque no podría ni consultar a la videoteca ni cargar su interfaz. -->
+  <tizen:content-security-policy>default-src *; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src * data:; media-src *; connect-src *</tizen:content-security-policy>
+  <tizen:allow-navigation>127.0.0.1</tizen:allow-navigation>
+</widget>

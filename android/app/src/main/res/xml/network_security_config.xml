@@ -1,0 +1,5 @@
+<network-security-config>
+    <!-- API por HTTPS con el certificado público del hogar. HTTP se limita a la entrega de video con acceso temporal. -->
+    <base-config cleartextTrafficPermitted="true"><trust-anchors><certificates src="system"/><certificates src="@raw/home_server"/></trust-anchors></base-config>
+</network-security-config>
+

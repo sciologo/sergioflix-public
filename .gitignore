@@ -1,0 +1,46 @@
+# Configuration, credentials and per-installation files
+.venv/
+.env
+.env.*
+!.env.example
+private/
+Archivos de desarrollo/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.crt
+signing.properties
+local.properties
+# Runtime data and build output
+__pycache__/
+.pytest_cache/
+*.pyc
+*.log
+logs/
+backups/
+cache/
+dist/
+tools/
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.bak
+*.apk
+*.aab
+*.wgt
+# Android/Tizen local tools and generated packages
+android/.gradle/
+android/**/build/
+android/.kotlin/
+tizen/app/.buildResult/
+author-signature.xml
+signature1.xml
+# Editor/OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
